@@ -1,0 +1,23 @@
+apiVersion : apps/v1
+kind: Deployment
+metadata:
+  name: mavenexercise 
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: mavenexercise
+  template:
+    metadata:
+      labels:
+        app: mavenexercise
+    spec:
+      containers:
+        - name: mavenexercise
+          image: renatts/mavenexercise:latest
+          imagePullPolicy: "Always"
+          command: ["java"]
+          args: ["-jar", "target/myapp-1.0.jar", "--server.port=80"]
+          ports:
+          - containerPort: 80
+            protocol: TCP
